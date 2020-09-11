@@ -23,11 +23,9 @@
                 <table id="properties" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-              <#if whitepapers?first??>
-                <#list whitepapers?first.docProperties as property>
-                   
-                    <th>${property.key}</th>
-        
+              <#if documentkeys??>
+                <#list documentkeys as key_object>
+                    <th>${key_object.key}</th>
                 </#list>
                </#if>
                  </tr>
@@ -35,11 +33,18 @@
          <tbody>
             <#list whitepapers as child>
                 <tr>
-                <#list child.docProperties as property>
-                   
-                      <td>${property.value}</td>
-                  
-                </#list>
+                    <#list documentkeys as key_object>
+                      <#assign key_found=false>
+                      <#list child.docProperties as property>
+                        <#if property.key==key_object.key>
+                          <#assign key_found=true>
+                          <td>${property.value}</td>
+                        </#if>
+                      </#list>
+                      <#if key_found==false>
+                          <td></td>
+                      </#if>
+                    </#list>
               </tr>
             </#list>
         </tbody>

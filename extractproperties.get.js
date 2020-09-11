@@ -36,21 +36,18 @@ if(args.aspect!="undefined" && args.aspect!=null){
 
 }
 
-//if (documents == null || documents .length == 0) {
-    //status.code = 200;
-    //status.message = "No documents found";
-   // status.redirect = true;
-//} else {
+var documentInfo= new Array();
+var document_keys = new Array()
 
-   var documentInfo= new Array();
-   for (i = 0; i < documents.length; i++) {
-        var docProperties= new doc(documents[i])
-        documentInfo.push(docProperties);
-    }
-    model.whitepapers = documentInfo;
-    model.aspectsearchpath  = aspectsearchpath;
-    model.typesearchpath = typesearchpath;
-//}
+for (i = 0; i < documents.length; i++) {
+    var docProperties= new doc(documents[i])
+    documentInfo.push(docProperties);
+}
+
+model.documentkeys = document_keys.map(getKeyObject)
+model.whitepapers = documentInfo;
+model.aspectsearchpath  = aspectsearchpath;
+model.typesearchpath = typesearchpath;
 
 function doc(document){
  this.docProperties = new Array()
@@ -59,7 +56,25 @@ function doc(document){
    }
 }
 
+function getKeyObject(key){
+    return new key_object(key)
+}
+
+
+
 function property_doc(key,value){
-this.key = JSON.stringify(key)!="undefined"?JSON.stringify(key).replace(/\"/g," "):JSON.stringify(key)
-this.value = (typeof JSON.stringify(value))=="undefined"?JSON.stringify(value):JSON.stringify(value).replace(/\"/g," ")
+    // this.mapped = {}
+    this.key = JSON.stringify(key)!="undefined"?JSON.stringify(key).replace(/\"/g," "):JSON.stringify(key)
+    this.value = (typeof JSON.stringify(value))=="undefined"?JSON.stringify(value):JSON.stringify(value).replace(/\"/g," ")
+    // mapp key to value
+    // this.mapped[this.key] = this.value
+
+    // add key to
+    if (document_keys.indexOf(this.key)==-1) {
+        document_keys.push(key)
+    }
+}
+
+function key_object(key){
+    this.key = key
 }
