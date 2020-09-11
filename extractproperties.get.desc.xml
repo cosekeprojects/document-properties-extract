@@ -1,0 +1,7 @@
+<webscript>
+    <shortname>Extract Properties Webscript</shortname>
+    <description>Returns properties of all documents of a specific type</description>
+    <url>/documents/properties?type={type}</url>
+    <authentication>user</authentication>
+    <format default="html"></format>  
+</webscript>
