@@ -1,7 +1,7 @@
 <#assign datetimeformat="EEE, dd MMM yyyy HH:mm:ss zzz">
 <html>
 <head>
-  <title>Document Properties</title>
+  <title>Document Properties for ${title}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -20,6 +20,7 @@
                 <p>
                   type = ${typesearchpath}
                 </p>
+<p> length = ${size}</p>
                 <table id="properties" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
@@ -61,7 +62,7 @@
   $(document).ready(function() {
     $('#properties').DataTable({
         dom: 'lBfrtip',
-         "lengthMenu": [[10, 25, 50,100, -1], ["show 10", "show 25", "show 50", "show 100", "All"]]
+         "lengthMenu": [[10, 25, 50,100, -1], ["show 10", "show 25", "show 50", "show 100", "All"]],
         buttons: [
             'copyHtml5',
             'excelHtml5',
